@@ -19,7 +19,7 @@ public class DemoSiteTest extends UIInteractions {
     public void userIsOnLoginScreen() {
         loginScreen.openApplication();
     }
-    @When("User enters  username and password and clicks on login button")
+    @When("User enters username and password and clicks on login button")
     public void userEntersAndAndClicksOnLoginButton() {
         loginScreen.login(prop.getProperty("username"), prop.getProperty("password"));
     }
