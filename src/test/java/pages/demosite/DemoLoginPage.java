@@ -6,6 +6,9 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import testCases.stepdefinitions.DemoSiteTest;
 
 import java.util.Set;
 
@@ -26,7 +29,7 @@ public class DemoLoginPage extends PageObject {
     @FindBy(xpath = "//div[@class=\"inventory_details_price\"]")
     private WebElement priceElement;
    private static String productName = "//div[@class=\"inventory_item_name\" and text()='%s']";
-
+    private static final Logger logger = LoggerFactory.getLogger(DemoLoginPage.class);
 
     public static final String DEFAULT_URL = "https://www.saucedemo.com/v1/index.html";
     public static String getDefaultUrl() {
@@ -45,11 +48,11 @@ public class DemoLoginPage extends PageObject {
     }
 
     public void verifyLogin() {
-        System.out.println("Title: "+getDriver().getTitle());
-        String actual = getDriver().getTitle();
+               String actual = getDriver().getTitle();
         String expected = "Swag Labs";
         Assert.assertEquals(actual, expected);
-    }
+        logger.info("Expected title: "+expected+" is equal to the Actual title: "+actual+". Successfully logged in to the Application");
+         }
 
 
     public void cardSearch()  {

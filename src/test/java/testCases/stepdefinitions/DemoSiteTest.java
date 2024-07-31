@@ -7,9 +7,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.core.steps.UIInteractions;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pages.demosite.DemoLoginScreen;
 
 public class DemoSiteTest extends UIInteractions {
+    private static final Logger logger = LoggerFactory.getLogger(DemoSiteTest.class);
     PropertyFileReader prop=new PropertyFileReader("src/test/resources/config.properties");
     @Steps
     DemoLoginScreen loginScreen;
@@ -17,19 +21,23 @@ public class DemoSiteTest extends UIInteractions {
 
     @Given("User is on Login Screen")
     public void userIsOnLoginScreen() {
+        logger.info("User is on Login Screen");
         loginScreen.openApplication();
     }
     @When("User enters username and password and clicks on login button")
     public void userEntersAndAndClicksOnLoginButton() {
+        logger.info("User enters username and password and click on login button");
         loginScreen.login(prop.getProperty("username"), prop.getProperty("password"));
     }
     @Then("User selects {} from the list")
     public void userSelectstheProduct(String product) {
+        logger.info("User selects "+product+ "from the list");
         loginScreen.selectProduct(product);
     }
 
     @And("^User verify the product price is equal to the (.*)")
     public void userVerifyTheProductPriceIsEqualToThe(String price) {
+        logger.info("Verifying the product price is equal to the"+ price);
         loginScreen.verifyPriceofElement(price);
     }
 
