@@ -1,25 +1,19 @@
 package testCases;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.junit.Rule;
+
 import Utils.JiraTicketonFailure;
 import Utils.Storage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import io.cucumber.plugin.event.*;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.Assert;
-import org.junit.Rule;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.Assert.fail;
 
 public class ScenarioStatusStore {
     @Rule
@@ -41,6 +35,14 @@ public class ScenarioStatusStore {
         // After scenario hook
         String scenarioName = scenario.getName();
         String status = scenario.getStatus().toString();
+        
+        String runPlanPath = System.getProperty("cucumber.features");
+        String runPlanId = "Default";
+        if (runPlanPath != null) {
+        	 runPlanId = extractFeatureId(runPlanPath);
+        }
+
+        System.out.println("runPlanId: " + runPlanId);
         System.out.println("scenarioName: " + scenarioName + " Status: " + status);
         // Map Cucumber scenario status to custom status (e.g., Passed, Failed)
      /*   if (status.equalsIgnoreCase("PASSED")) {
@@ -52,7 +54,7 @@ public class ScenarioStatusStore {
         System.out.println("########################################################################################################");
       if(status.equalsIgnoreCase("FAILED"))
       {
-          String str= jireTicketonFailure.createTicket(scenarioName,scenario.getStatus().toString());
+          String str= jireTicketonFailure.createTicket(scenarioName,scenario.getStatus().toString(), runPlanId);
           System.out.println("Jira issue ID:"+str);
       }
         // writeScenarioStatusesToExcel(scenarioStatuses, "src/test/resources/ExecutionStatusSheet/scenariostatus.xlsx");
@@ -67,6 +69,19 @@ public class ScenarioStatusStore {
             }
         }*/
            }
+    
+    public static String extractFeatureId(String filePath) {
+        // Get the file name from the path
+        String fileName = Paths.get(filePath).getFileName().toString();
+        
+        // Remove the file extension to get the ID
+        if (fileName.endsWith(".feature")) {
+            return fileName.substring(0, fileName.length() - ".feature".length());
+        } else {
+            // Handle cases where the file extension might be different or missing
+            return fileName;
+        }
+    }
 
    /* @AfterClass
     public static void afterClass()

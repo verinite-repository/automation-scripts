@@ -60,9 +60,9 @@ public class JiraTicketonFailure extends TestWatcher {
         return issueKey;
     }
 
-    public String createTicket(String testName,String errorMessage) throws IOException {
+    public String createTicket(String testName,String errorMessage, String runPlanId) throws IOException {
         String apiUrl = jiraBaseUrl + "/rest/api/2/issue/";
-        String summary = "Automated Test Failure: " + testName;
+        String summary = "[Automated] Run Plan [" + runPlanId + "] :: Test Name :" + testName;
         String description = "Test Case: " + testName + " Error Message: " + errorMessage;
         JSONObject json = new JSONObject();
         JSONObject fields = new JSONObject();
