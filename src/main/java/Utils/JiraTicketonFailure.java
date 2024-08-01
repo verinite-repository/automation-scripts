@@ -1,7 +1,12 @@
 package Utils;
 
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.logging.Logger;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -10,21 +15,20 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.JSONObject;
 import org.junit.rules.TestWatcher;
-import org.junit.runner.Description;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.logging.Logger;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 
 public class JiraTicketonFailure extends TestWatcher {
 
-    private String jiraBaseUrl = "https://demoserenity.atlassian.net";
-    private String jiraUsername = "neha.kale@verinite.com";
-    private String jiraPassword = "ATATT3xFfGF06v9sD6_caxgxgpqBX70ok4Fk2S4GYwWyLmHPQ22JTvOLgMxDZk45ch-9SkoAnA3dQ_GgGo2OrhumMK_RooOugwSvqrQ-xTA8UcXrnG6IApxYLiLynXoqa0siIEdTAvfDXa2CvnWcM_AhkaHgRYol2peVr9BbNoYsuP4-7gUC7DI=F4FA1E0F";
-    private String jiraProjectKey = "SCRUM";
+//    private String jiraBaseUrl = "https://demoserenity.atlassian.net";
+//    private String jiraUsername = "neha.kale@verinite.com";
+//    private String jiraPassword = "ATATT3xFfGF06v9sD6_caxgxgpqBX70ok4Fk2S4GYwWyLmHPQ22JTvOLgMxDZk45ch-9SkoAnA3dQ_GgGo2OrhumMK_RooOugwSvqrQ-xTA8UcXrnG6IApxYLiLynXoqa0siIEdTAvfDXa2CvnWcM_AhkaHgRYol2peVr9BbNoYsuP4-7gUC7DI=F4FA1E0F";
+//    private String jiraProjectKey = "SCRUM";
+	private String jiraBaseUrl = "https://verinite-team-itn5zr3m.atlassian.net";
+    private String jiraUsername = "sumeet.bandgar@verinite.com";
+    private String jiraPassword = "ATATT3xFfGF0jlvIwAMVe9hKTwIxcwKd3pp2_8SMzrBU6nB_1rdWavAzAF3MuqohLYd2sFXqYcyuD2_I4IF54FjTaO8s9MF8rWtot35yQwltvrbgZSl6aqkuCQNpspyHATjP4RCCqS0UWIllQQr4Yebns4UUOzPkY_fUqzQFb36_9dqH6GOXWY4=9CE11053";
+    private String jiraProjectKey = "KAN";
     private static final Logger logger = Logger.getLogger(JiraTicketonFailure.class.getName());
 
    /* @Override
