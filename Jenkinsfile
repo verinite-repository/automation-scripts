@@ -3,6 +3,7 @@ pipeline {
     
     parameters {
         string(name: 'RUN_PLAN_ID', defaultValue: ' ', description: 'RunPlan Id for which test cases to be run')
+        string(name: 'APP_URL', defaultValue: 'http://192.168.3.55:8090', description: 'Application Service URL')
     }
     
     tools {
@@ -27,14 +28,15 @@ pipeline {
     
     post {
             success {
-                script {
-                    sh 'ls'
-                }
-                archiveArtifacts 'automation-scripts/target/site/serenity/**'
+                //script {
+                //    sh 'ls'
+                //}
+                archiveArtifacts 'target/site/serenity/**'
             }
             always {
                 script {
-                    def apiUrl = 'http://192.168.3.55:8090/api/v1/cardtest/notify/build'
+                	def baseUrl = params.RUN_PLAN_ID
+                    def apiUrl = baseUrl + '/api/v1/cardtest/notify/build'
                     def status = currentBuild.result ?: 'SUCCESS'
                     sh """
                         curl -X POST ${apiUrl} \
