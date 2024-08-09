@@ -27,17 +27,14 @@ pipeline {
     }
     
     post {
-            success {
-                //script {
-                //    sh 'ls'
-                //}
-                archiveArtifacts 'target/site/serenity/**'
-            }
             always {
                 script {
                 	def baseUrl = params.APP_URL
                     def apiUrl = baseUrl + '/api/v1/cardtest/notify/build'
                     def status = currentBuild.result ?: 'SUCCESS'
+                    if (status == 'SUCCESS') {
+                    	archiveArtifacts 'target/site/serenity/**'
+                    }
                     sh """
                         curl -X POST ${apiUrl} \
                              -H "Content-Type: application/json" \
