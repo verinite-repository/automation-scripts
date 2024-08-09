@@ -15,10 +15,10 @@ pipeline {
                 script {
                     def runPlanId = params.RUN_PLAN_ID
                     if (runPlanId?.trim()) {
-                        sh "cd automation-scripts && chmod 777 -R . && mvn clean verify -Dcucumber.features=src/test/resources/features/${runPlanId}.feature -Dmaven.test.failure.ignore=true"
+                        sh "mvn clean verify -Dcucumber.features=src/test/resources/features/${runPlanId}.feature -Dmaven.test.failure.ignore=true"
                     }
                     else {
-                        sh "cd automation-scripts && chmod 777 -R . && mvn clean verify -Dmaven.test.failure.ignore=true"
+                        sh "mvn clean verify -Dmaven.test.failure.ignore=true"
                     }
                 }
             }
