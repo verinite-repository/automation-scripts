@@ -35,7 +35,7 @@ pipeline {
             }
             always {
                 script {
-                	def baseUrl = params.RUN_PLAN_ID
+                	def baseUrl = params.APP_URL
                     def apiUrl = baseUrl + '/api/v1/cardtest/notify/build'
                     def status = currentBuild.result ?: 'SUCCESS'
                     sh """
