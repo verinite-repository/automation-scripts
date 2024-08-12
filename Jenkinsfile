@@ -40,7 +40,7 @@ pipeline {
                     sh """
                         curl -X POST ${apiUrl} \
                              -H "Content-Type: application/json" \
-                             -d '{"status": "${status}", "buildNumber": "${env.BUILD_NUMBER}", "fileName": "${params.RUN_PLAN_ID}-${params.SCENARIO_TYPE}"}'
+                             -d '{"status": "${status}", "buildNumber": "${env.BUILD_NUMBER}", "fileName": "${params.RUN_PLAN_ID}-${params.SCENARIO_TYPE}", "runPlanId":"${params.RUN_PLAN_ID}"}'
                     """
                 }
             }
