@@ -34,7 +34,16 @@ pipeline {
                 	def baseUrl = params.APP_URL
                     def apiUrl = baseUrl + '/api/v1/cardtest/notify/build'
                     def status = currentBuild.result ?: 'SUCCESS'
+                    def sourcePath = 'images/serenity-logo.png'
+                    def destinationPath = 'target/site/serenity/images/serenity-logo.png'
                     if (status == 'SUCCESS') {
+                    	sh "mv ${sourcePath} ${destinationPath}"
+                    	def filePath = 'target/site/serenity/index.html'
+                        def searchPattern = '"images/serenity-logo.png"'
+                        def replacementString = '"images/serenity-logo.png" style="width: 150px;"'
+                        def fileContent = new File(filePath).text
+                        def updatedContent = fileContent.replaceAll(searchPattern, replacementString)
+                        new File(filePath).write(updatedContent)
                     	archiveArtifacts 'target/site/serenity/**'
                     }
                     sh """
