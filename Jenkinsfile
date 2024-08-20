@@ -38,7 +38,7 @@ pipeline {
                     def destinationPath = 'target/site/serenity/images/serenity-logo.png'
                     if (status == 'SUCCESS') {
                     	sh "mv ${sourcePath} ${destinationPath}"
-                    	def filePath = 'target/site/serenity/index.html'
+                    	def filePath = '/var/jenkins_home/workspace/CARDTEST.AI/target/site/serenity/index.html'
                         def searchPattern = '"images/serenity-logo.png"'
                         def replacementString = '"images/serenity-logo.png" style="width: 150px;"'
                         def fileContent = new File(filePath).text
