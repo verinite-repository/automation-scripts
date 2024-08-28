@@ -3,7 +3,7 @@ pipeline {
     
     parameters {
         string(name: 'RUN_PLAN_ID', defaultValue: ' ', description: 'RunPlan Id for which test cases to be run')
-        string(name: 'APP_URL', defaultValue: 'http://192.168.3.55:8090', description: 'Application Service URL')
+        string(name: 'APP_URL', defaultValue: 'http://192.168.3.195:8090', description: 'Application Service URL')
         string(name: 'SCENARIO_TYPE', defaultValue: 'pre', description: 'pre/post run scenarios')
     }
     
