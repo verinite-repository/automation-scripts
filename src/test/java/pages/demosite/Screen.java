@@ -1,9 +1,9 @@
 package pages.demosite;
 
-import net.serenitybdd.annotations.Step;
-import org.junit.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import Utils.PropertyFileReader;
+import net.serenitybdd.annotations.Step;
 
 public class Screen {
 
@@ -12,13 +12,19 @@ public class Screen {
 	Page page;
 
 	@Step
-	public void open(String elementType, String elementKey) {
-		page.open();
+	public void open(String user, String elementKey) {
+//		String eleValue = elementKey + "_" + elementType;
+		if (prop.getProperty(elementKey) != null) {
+			page.openPage(prop.getProperty(elementKey));
+		}
 	}
 
 	@Step
 	public void update(String value, String elementType, String elementKey) throws Exception {
-		page.update(value, elementType, elementKey);
+		String eleValue = elementKey + "_" + elementType;
+		if (prop.getProperty(eleValue) != null) {
+//			page.updateByXpath(value, elementType, prop.getProperty(eleValue));
+		}
 	}
 
 	@Step
@@ -27,13 +33,28 @@ public class Screen {
 	}
 
 	@Step
-	public void click(String elementKey, String elementValue) throws Exception {
-		page.click(elementValue, elementKey);
+	public void click(String elementKey) throws Exception {
+		if (prop.getProperty(elementKey) != null) {
+			page.click(prop.getProperty(elementKey));
+		}
+		
 	}
 
 	@Step
 	public void verify(String elementKey, String elementValue) throws Exception {
 		page.get(null, null);
+	}
+
+	@Step
+	public void updateByElementName(String data, String elementName) throws Exception {
+		if (prop.getProperty(elementName) != null) {
+			page.updateByElementName(data, prop.getProperty(elementName));
+		}
+	}
+
+	@Step
+	public void view(String data) {
+		page.view(data);
 	}
 
 //	@Step
