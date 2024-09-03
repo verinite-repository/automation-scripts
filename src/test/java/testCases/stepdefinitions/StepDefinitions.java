@@ -50,9 +50,9 @@ public class StepDefinitions extends UIInteractions {
     }
 
     @When("he enters the value {} in the field named {}")
-    public void heEntersTheValueDataInTheFieldNamedGooglesearchinput(String data, String googlesearchinput) {
-        System.out.println("parameters: " + data + ", " + googlesearchinput);
-        screen.update(data, "name", elementName);
+    public void heEntersTheValueDataInTheFieldNamedGoogleSearchInput(String data, String googleSearchInput) {
+        System.out.println("parameters: " + data + ", " + googleSearchInput);
+        screen.update(data, "name", googleSearchInput);
     }
 
     @When("he clicks the button identified by {}")
@@ -62,9 +62,9 @@ public class StepDefinitions extends UIInteractions {
     }
 
     @When("he clicks the button named {}")
-    public void heClicksTheButtonNamedGooglesearchbutton(String googlesearchbutton) {
-        System.out.println("parameters: " + googlesearchbutton);
-        screen.click("name", buttonName);
+    public void heClicksTheButtonNamedGoogleSearchButton(String googleSearchButton) {
+        System.out.println("parameters: " + googleSearchButton);
+        screen.click("name", googleSearchButton);
     }
 
     @When("he clicks the element identified by {}")
