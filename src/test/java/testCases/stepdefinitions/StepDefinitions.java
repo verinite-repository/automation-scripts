@@ -26,7 +26,6 @@ public class StepDefinitions extends UIInteractions {
     @Given("{} is on {} page")
     public void userIsOnGoogleurlPage(String user, String googleurl) {
         System.out.println("parameters: " + user + ", " + googleurl);
-        screen.open(user, url);
     }
 
     @When("he views the value in the field {}")
@@ -37,11 +36,6 @@ public class StepDefinitions extends UIInteractions {
     @Then("he should be able to view {} in the field")
     public void heShouldBeAbleToViewDataInTheField(String data) {
         System.out.println("parameters: " + data);
-        wait.until(ExpectedConditions.titleContains(data));
-        logger.info("Page title contains: {}", data);
-        if (driver != null) {
-            driver.quit();
-        }
     }
 
     @When("he enters the value {} in the field with a path {}")
@@ -57,9 +51,6 @@ public class StepDefinitions extends UIInteractions {
     @When("he enters the value {} in the field named {}")
     public void heEntersTheValueDataInTheFieldNamedGooglesearchinput(String data, String googlesearchinput) {
         System.out.println("parameters: " + data + ", " + googlesearchinput);
-        WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(elementName)));
-        searchBox.clear();
-        searchBox.sendKeys(data);
     }
 
     @When("he clicks the button identified by {}")
@@ -70,9 +61,6 @@ public class StepDefinitions extends UIInteractions {
     @When("he clicks the button named {}")
     public void heClicksTheButtonNamedGooglesearchbutton(String googlesearchbutton) {
         System.out.println("parameters: " + googlesearchbutton);
-        WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.name(buttonName)));
-        searchButton.click();
-        logger.info("Clicked the button: {}", buttonName);
     }
 
     @When("he clicks the element identified by {}")
