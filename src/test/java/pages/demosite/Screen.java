@@ -1,6 +1,7 @@
 package pages.demosite;
 
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Utils.PropertyFileReader;
 import net.serenitybdd.annotations.Step;
@@ -13,43 +14,30 @@ public class Screen {
 
 	@Step
 	public void open(String user, String elementKey) {
-//		String eleValue = elementKey + "_" + elementType;
-		if (prop.getProperty(elementKey) != null) {
-			page.openPage(prop.getProperty(elementKey));
-		}
+		elementKey = findBrackets(elementKey);
+		page.openPage(elementKey);
 	}
 
 	@Step
-	public void update(String value, String elementType, String elementKey) throws Exception {
-		String eleValue = elementKey + "_" + elementType;
-		if (prop.getProperty(eleValue) != null) {
-//			page.updateByXpath(value, elementType, prop.getProperty(eleValue));
-		}
+	public void update(String value, String elementType, String elementKey) {
+		elementKey = findBrackets(elementKey);
+		page.update(value, elementType, elementKey);
 	}
 
 	@Step
-	public void select(String elementType, String elementKey) throws Exception {
+	public void select(String elementType, String elementKey) {
 		page.get(elementType, elementKey);
 	}
 
 	@Step
-	public void click(String elementKey) throws Exception {
-		if (prop.getProperty(elementKey) != null) {
-			page.click(prop.getProperty(elementKey));
-		}
-		
+	public void click(String id, String elementKey) {
+		elementKey = findBrackets(elementKey);
+		page.click(id, elementKey);
 	}
 
 	@Step
-	public void verify(String elementKey, String elementValue) throws Exception {
+	public void verify(String elementKey, String elementValue) {
 		page.get(null, null);
-	}
-
-	@Step
-	public void updateByElementName(String data, String elementName) throws Exception {
-		if (prop.getProperty(elementName) != null) {
-			page.updateByElementName(data, prop.getProperty(elementName));
-		}
 	}
 
 	@Step
@@ -57,43 +45,31 @@ public class Screen {
 		page.view(data);
 	}
 
-//	@Step
-//	public void openApplication() {
-//		loginScreenPage.open();
-//		long maxWaitTime = 5000; // maximum wait 5Sec time
-//		long startTime = System.currentTimeMillis();
-//		while (System.currentTimeMillis() - startTime < maxWaitTime) {
-//			if (loginScreenPage.getDriver().getCurrentUrl().equals(DemoLoginPage.getDefaultUrl())) {
-//				break;
-//			}
-//			try {
-//				Thread.sleep(2000); // 2 seconds
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
+//	public String findVariable(String statement) {
+//		String regex = "<(.*?)>";
+//		Pattern pattern = Pattern.compile(regex);
+//		Matcher matcher = pattern.matcher(statement);
+//		int lastEnd = 0;
+//		StringBuilder result = new StringBuilder();
+//		while (matcher.find()) {
+//			String value = matcher.group(1);
+//			result.append(statement, lastEnd, matcher.start());
+//			result.append(prop.getProperty(value));
+//			lastEnd = matcher.end();
 //		}
-//	}
-//
-//	@Step
-//	public void login(String username, String password) {
-//		loginScreenPage.setuser(username);
-//		loginScreenPage.setpassword(password);
-//		loginScreenPage.clickloginbtn();
-//		loginScreenPage.verifyLogin();
-//
-//	}
-//
-//	@Step
-//	public void selectProduct(String product) {
-//		loginScreenPage.selectProduct(product);
-//	}
-//
-//	@Step
-//	public void verifyPriceofElement(String price) {
-//		System.out.println(loginScreenPage.getProductPrice());
-//		Assert.assertEquals("Actual Product price is not equal to :$" + price, "$" + price,
-//				loginScreenPage.getProductPrice());
-//
+//		result.append(statement.substring(lastEnd));
+//		return result.toString();
 //	}
 
+	public String findBrackets(String element) {
+		String regex = "<(.*?)>";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(element);
+		if (matcher.find()) {
+			String value = matcher.group(1);
+			return prop.getProperty(value);
+		} else {
+			return element;
+		}
+	}
 }

@@ -1,17 +1,14 @@
 package testCases.stepdefinitions;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import Utils.PropertyFileReader;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.core.steps.UIInteractions;
-import pages.demosite.DemoLoginScreen;
 import pages.demosite.Screen;
 
 public class StepDefinitions extends UIInteractions {
@@ -24,8 +21,8 @@ public class StepDefinitions extends UIInteractions {
     Screen screen;
 
     @Given("{} is on {} page")
-    public void userIsOnGoogleurlPage(String user, String googleurl) {
-        System.out.println("parameters: " + user + ", " + googleurl);
+    public void userIsOnUrlPage(String user, String url) {
+        screen.open(user, url);
     }
 
     @When("he views the value in the field {}")
