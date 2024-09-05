@@ -44,6 +44,10 @@ pipeline {
                     if (status == 'SUCCESS') {
                     	sh "mv ${sourcePath} ${destinationPath}"
                     	def filePath = '/var/jenkins_home/workspace/CARDTEST.AI/target/site/serenity/index.html'
+                        def fileContent = new File(filePath).text
+                        def updatedContent1 = fileContent.replaceAll(searchPattern, replacementString)
+                        new File(filePath).write(updatedContent1)
+
                         def dirPath = '/var/jenkins_home/workspace/CARDTEST.AI/target/site/serenity'
                         def searchPattern = '"images/serenity-logo.png"'
                         def replacementString = '"images/serenity-logo.png" style="width: 150px;"'
