@@ -1,3 +1,4 @@
+import groovy.io.FileType
 pipeline {
     agent any
     
@@ -39,11 +40,27 @@ pipeline {
                     if (status == 'SUCCESS') {
                     	sh "mv ${sourcePath} ${destinationPath}"
                     	def filePath = '/var/jenkins_home/workspace/CARDTEST.AI/target/site/serenity/index.html'
+                        def dirPath = '/var/jenkins_home/workspace/CARDTEST.AI/target/site/serenity'
                         def searchPattern = '"images/serenity-logo.png"'
                         def replacementString = '"images/serenity-logo.png" style="width: 150px;"'
-                        def fileContent = new File(filePath).text
-                        def updatedContent = fileContent.replaceAll(searchPattern, replacementString)
-                        new File(filePath).write(updatedContent)
+
+                        def directory = new File(dirPath)
+                        if (!directory.exists() || !directory.isDirectory()) {
+                            println "Directory does not exist: $dirPath"
+                            return
+                        }
+                        directory.eachFileRecurse(FileType.FILES) { file ->
+                            if (file.name.endsWith('.html')) {
+                                println "Processing file: ${file.absolutePath}"
+                                def content = file.text
+                                def updatedContent = content.replace(searchPattern, replacementString)
+                                file.text = updatedContent
+                                println "Updated file: ${file.absolutePath}"
+                            }
+                        }
+                        //def fileContent = new File(filePath).text
+                        //def updatedContent = fileContent.replaceAll(searchPattern, replacementString)
+                        //new File(filePath).write(updatedContent)
                     	archiveArtifacts 'target/site/serenity/**'
                     }
                     sh """
