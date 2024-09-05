@@ -52,9 +52,11 @@ pipeline {
                         directory.eachFileRecurse(FileType.FILES) { file ->
                             if (file.name.endsWith('.html')) {
                                 println "Processing file: ${file.absolutePath}"
-                                def content = file.text
+                                //def content = file.text
+                                def content = new File(file).text
                                 def updatedContent = content.replace(searchPattern, replacementString)
-                                file.text = updatedContent
+                                //file.text = updatedContent
+                                new File(file).write(updatedContent)
                                 println "Updated file: ${file.absolutePath}"
                             }
                         }
