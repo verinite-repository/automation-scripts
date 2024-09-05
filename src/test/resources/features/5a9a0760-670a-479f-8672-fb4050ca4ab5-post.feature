@@ -7,4 +7,4 @@ Scenario Outline: InputSearchValidation
     Then he should be able to view <search_title_result> in the field
      Examples:     
           |  user  |  url  |  search_title  |  search_input  |  search_button  |  search_title_result  |  
-          |  John  |  https://www.google.com  |  OpenAI  |  q  |  btnK  |  OpenAI  |  
+          |  John  |  https://login.yahoo.com  |  john  |  username  |  signin  |  Yahoo  |  
