@@ -53,10 +53,12 @@ pipeline {
                             if (file.name.endsWith('.html')) {
                                 println "Processing file: ${file.absolutePath}"
                                 //def content = file.text
-                                def content = new File(file).text
+                                //def content = new File(file).text
+                                def content = new String(Files.readAllBytes(Paths.get(file.absolutePath)), StandardCharsets.UTF_8)
                                 def updatedContent = content.replace(searchPattern, replacementString)
                                 //file.text = updatedContent
-                                new File(file).write(updatedContent)
+                                //new File(file).write(updatedContent)
+                                Files.write(Paths.get(file.absolutePath), updatedContent.getBytes(StandardCharsets.UTF_8))
                                 println "Updated file: ${file.absolutePath}"
                             }
                         }
