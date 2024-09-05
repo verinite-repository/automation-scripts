@@ -1,6 +1,8 @@
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.charset.StandardCharsets
+import groovy.io.FileType
+
 pipeline {
     agent any
     
