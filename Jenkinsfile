@@ -56,19 +56,37 @@ pipeline {
                             println "Directory does not exist: $dirPath"
                             return
                         }
-                        directory.eachFileRecurse(FileType.FILES) { file ->
-                            if (file.name.endsWith('.html')) {
-                                println "Processing file: ${file.absolutePath}"
-                                //def content = file.text
-                                //def content = new File(file).text
-                                def content = new String(Files.readAllBytes(Paths.get(file.absolutePath)), StandardCharsets.UTF_8)
-                                def updatedContent = content.replace(searchPattern, replacementString)
-                                //file.text = updatedContent
-                                //new File(file).write(updatedContent)
-                                Files.write(Paths.get(file.absolutePath), updatedContent.getBytes(StandardCharsets.UTF_8))
-                                println "Updated file: ${file.absolutePath}"
+
+                        sh(script: "ls ${dirPath}", returnStdout: true).split('\n').each { fileName ->
+                            def f1 = "${dirPath}/${fileName}"
+                            if (fileName.trim()) { // Check if the fileName is not empty
+                                 if (fileName.endsWith('.html')) {
+                                    echo "Reading file: ${fileName}"
+                                    def file = new File(f1)
+                                    def content = file.text
+                                    def updatedContent = content.replaceAll('images/serenity-logo.png', 'images/serenity-logo.png" style="width: 150px;')
+                                    file.write(updatedContent)
+                                    echo "File Contents Updated: ${fileName}"
+                                 }
+                                // def content = sh(script: "cat ${filePath}", returnStdout: true)
+                                // echo "Content of ${fileName}:\n${content}"
                             }
                         }
+
+                        
+                        //directory.eachFileRecurse(FileType.FILES) { file ->
+                        //    if (file.name.endsWith('.html')) {
+                        //        println "Processing file: ${file.absolutePath}"
+                                //def content = file.text
+                                //def content = new File(file).text
+                        //        def content = new String(Files.readAllBytes(Paths.get(file.absolutePath)), StandardCharsets.UTF_8)
+                        //        def updatedContent = content.replace(searchPattern, replacementString)
+                                //file.text = updatedContent
+                                //new File(file).write(updatedContent)
+                        //        Files.write(Paths.get(file.absolutePath), updatedContent.getBytes(StandardCharsets.UTF_8))
+                        //        println "Updated file: ${file.absolutePath}"
+                        //    }
+                        //}
                         //def fileContent = new File(filePath).text
                         //def updatedContent = fileContent.replaceAll(searchPattern, replacementString)
                         //new File(filePath).write(updatedContent)
