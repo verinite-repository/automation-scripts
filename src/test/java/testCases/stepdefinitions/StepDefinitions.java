@@ -20,9 +20,9 @@ public class StepDefinitions extends UIInteractions {
     Screen screen;
 
     @Given("{} is on {} page")
-    public void userIsOnGoogleUrlPage(String user, String googleUrl) {
-        System.out.println("parameters: " + user + ", " + googleUrl);
-        screen.open(user, googleUrl);
+    public void userIsOnUrlPage(String user, String url) {
+        System.out.println("parameters: " + user + ", " + url);
+        screen.open(user, url);
     }
 
     @When("he views the value in the field {}")
@@ -59,6 +59,12 @@ public class StepDefinitions extends UIInteractions {
     public void heClicksTheButtonIdentifiedByButtonId(String buttonId) {
         System.out.println("parameters: " + buttonId);
         screen.click("id", buttonId);
+    }
+
+    @When("he clicks the button identified by xpath {}")
+    public void heClicksTheButtonIdentifiedByXpathButtonxpath(String buttonxpath) {
+        System.out.println("parameters: " + buttonxpath);
+        screen.click("xpath", buttonXpath);
     }
 
     @When("he clicks the button named {}")
