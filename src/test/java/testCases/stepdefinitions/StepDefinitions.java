@@ -62,8 +62,8 @@ public class StepDefinitions extends UIInteractions {
     }
 
     @When("he clicks the button identified by xpath {}")
-    public void heClicksTheButtonIdentifiedByXpathButtonxpath(String buttonxpath) {
-        System.out.println("parameters: " + buttonxpath);
+    public void heClicksTheButtonIdentifiedByXpathButtonXpath(String buttonXpath) {
+        System.out.println("parameters: " + buttonXpath);
         screen.click("xpath", buttonXpath);
     }
 
