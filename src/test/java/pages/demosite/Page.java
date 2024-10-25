@@ -3,6 +3,7 @@ package pages.demosite;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,8 +39,16 @@ public class Page extends PageObject {
 	}
 
 	public void click(String elementType, String elementKey) {
-		WebElement clickOperation = decideElementTypeForWebElement(elementType, elementKey);
-		clickOperation.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+//		WebElement clickOperation = decideElementTypeForWebElement(elementType, elementKey);
+		WebElement executeButton= driver.findElement(By.xpath("//button[text()='Execute']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", executeButton);
+		//executeButton.click();
 //		WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.name(buttonName)));
 //		searchButton.click();
 	}

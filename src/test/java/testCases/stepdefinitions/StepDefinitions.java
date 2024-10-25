@@ -1,7 +1,9 @@
 package testCases.stepdefinitions;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import Utils.PropertyFileReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -20,9 +22,9 @@ public class StepDefinitions extends UIInteractions {
     Screen screen;
 
     @Given("{} is on {} page")
-    public void userIsOnGoogleUrlPage(String user, String googleUrl) {
-        System.out.println("parameters: " + user + ", " + googleUrl);
-        screen.open(user, googleUrl);
+    public void userIsOnUrlPage(String user, String url) {
+        System.out.println("parameters: " + user + ", " + url);
+        screen.open(user, url);
     }
 
     @When("he views the value in the field {}")
@@ -50,21 +52,27 @@ public class StepDefinitions extends UIInteractions {
     }
 
     @When("he enters the value {} in the field named {}")
-    public void heEntersTheValueDataInTheFieldNamedGoogleSearchInput(String data, String googleSearchInput) {
-        System.out.println("parameters: " + data + ", " + googleSearchInput);
-        screen.update(data, "name", googleSearchInput);
+    public void heEntersTheValueDataInTheFieldNamedElementName(String data, String elementName) {
+        System.out.println("parameters: " + data + ", " + elementName);
+        screen.update(data, "name", elementName);
     }
 
-    @When("he clicks the button identified by {}")
-    public void heClicksTheButtonIdentifiedByButtonId(String buttonId) {
-        System.out.println("parameters: " + buttonId);
-        screen.click("id", buttonId);
+//    @When("he clicks the button identified by {}")
+//    public void heClicksTheButtonIdentifiedByButtonId(String buttonId) {
+//        System.out.println("parameters: " + buttonId);
+//        screen.click("id", buttonId);
+//    }
+
+    @When("he clicks the button identified by xpath {}")
+    public void heClicksTheButtonIdentifiedByXpathButtonXpath(String buttonXpath) {
+        System.out.println("parameters: " + buttonXpath);
+        screen.click("xpath", buttonXpath);
     }
 
     @When("he clicks the button named {}")
-    public void heClicksTheButtonNamedGoogleSearchButton(String googleSearchButton) {
-        System.out.println("parameters: " + googleSearchButton);
-        screen.click("name", googleSearchButton);
+    public void heClicksTheButtonNamedButtonName(String buttonName) {
+        System.out.println("parameters: " + buttonName);
+        screen.click("name", buttonName);
     }
 
     @When("he clicks the element identified by {}")
