@@ -19,7 +19,6 @@ public class ScenarioStatusStore {
     @Rule
     public JiraTicketonFailure jireTicketonFailure = new JiraTicketonFailure();
     Storage storage=new Storage();
-
     private static Workbook workbook;
     private Sheet sheet;
     private List<Map<String, String>> stepDetails;
@@ -57,17 +56,7 @@ public class ScenarioStatusStore {
           String str= jireTicketonFailure.createTicket(scenarioName,scenario.getStatus().toString(), runPlanId);
           System.out.println("Jira issue ID:"+str);
       }
-        // writeScenarioStatusesToExcel(scenarioStatuses, "src/test/resources/ExecutionStatusSheet/scenariostatus.xlsx");
-     /*   Map<String, String> str=   Storage.getScenarioStatuses();
-        for (Map.Entry<String, String> set : str.entrySet()) {
-            System.out.println(set.getKey() + " = " + set.getValue());
-            if (set.getValue().equalsIgnoreCase("Failed")) {
-                // fail();
-               jireTicketonFailure.createJiraIssue(scenarioName,"Errrr message");
-            } else {
-                System.out.println("Passed");
-            }
-        }*/
+
            }
     
     public static String extractFeatureId(String filePath) {
@@ -88,11 +77,6 @@ public class ScenarioStatusStore {
     {
         System.out.println("-----------------------After CLASS-------------------------------------");
     }*/
-
-
-
-
-
     /* private void handleTestRunStarted(TestRunStarted event) {
         workbook = new XSSFWorkbook();
         sheet = workbook.createSheet("Step Execution Details");

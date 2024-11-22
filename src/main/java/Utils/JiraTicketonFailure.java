@@ -61,15 +61,15 @@ public class JiraTicketonFailure extends TestWatcher {
     }
 
     public String createTicket(String testName,String errorMessage, String runPlanId) throws IOException {
-        String apiUrl = jiraBaseUrl + "/rest/api/2/issue/";
+        String apiUrl = jiraBaseUrl + "/rest/api/3/issue/";
         String summary = "[Automated] Run Plan [" + runPlanId + "] :: Test Name :" + testName;
         String description = "Test Case: " + testName + " Error Message: " + errorMessage;
         JSONObject json = new JSONObject();
         JSONObject fields = new JSONObject();
+        fields.put("project", new JSONObject().put("key", jiraProjectKey).put("description",description));
         fields.put("summary", summary);
-        fields.put("description", description);
+        //fields.put("description", description);
         fields.put("issuetype", new JSONObject().put("name", "Bug"));
-        fields.put("project", new JSONObject().put("key", jiraProjectKey));
         json.put("fields", fields);
         StringBuilder responseStringBuilder = new StringBuilder();
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {

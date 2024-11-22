@@ -13,14 +13,12 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
+@SelectClasspathResource("/features")
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
         plugin = {"pretty"},
-        features = "classpath:features",
         glue = "testCases.stepdefinitions"
-       // tags = "@Spark_Card_Creation,@Card_Block"
-)
-@SelectClasspathResource("/features")
+      )
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "io.cucumber.core.plugin.SerenityReporterParallel,pretty,timeline:build/test-results/timeline")
 public class CucumberTestSuite {
 
