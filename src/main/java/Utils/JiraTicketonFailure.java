@@ -26,8 +26,8 @@ public class JiraTicketonFailure extends TestWatcher {
 //    private String jiraPassword = "ATATT3xFfGF06v9sD6_caxgxgpqBX70ok4Fk2S4GYwWyLmHPQ22JTvOLgMxDZk45ch-9SkoAnA3dQ_GgGo2OrhumMK_RooOugwSvqrQ-xTA8UcXrnG6IApxYLiLynXoqa0siIEdTAvfDXa2CvnWcM_AhkaHgRYol2peVr9BbNoYsuP4-7gUC7DI=F4FA1E0F";
 //    private String jiraProjectKey = "SCRUM";
 	private String jiraBaseUrl = "https://verinite-team-itn5zr3m.atlassian.net";
-    private String jiraUsername = "sumeet.bandgar@verinite.com";
-    private String jiraPassword = "ATATT3xFfGF0jlvIwAMVe9hKTwIxcwKd3pp2_8SMzrBU6nB_1rdWavAzAF3MuqohLYd2sFXqYcyuD2_I4IF54FjTaO8s9MF8rWtot35yQwltvrbgZSl6aqkuCQNpspyHATjP4RCCqS0UWIllQQr4Yebns4UUOzPkY_fUqzQFb36_9dqH6GOXWY4=9CE11053";
+    private String jiraUsername = "neha.kale@verinite.com";
+    private String jiraPassword = "ATATT3xFfGF0Kdrrw1ZhxXmIz3Zuzd-Rj1KBEddrhzVQbH25HCNxjpXYL2vJkpmoadiaO4n138MjftWMJPzAy6cXmXDCwZ0wpLViEaRUk6hiH9e6RvPEuH58MLG_5ILstn7JNWxWET15cWRd9FfdFB4gMM8auzgraUE-L3Z6017oBWdxRLQAolA=1586934C";
     private String jiraProjectKey = "KAN";
     private static final Logger logger = Logger.getLogger(JiraTicketonFailure.class.getName());
 
@@ -66,9 +66,9 @@ public class JiraTicketonFailure extends TestWatcher {
         String description = "Test Case: " + testName + " Error Message: " + errorMessage;
         JSONObject json = new JSONObject();
         JSONObject fields = new JSONObject();
-        fields.put("project", new JSONObject().put("key", jiraProjectKey).put("description",description));
+        fields.put("project", new JSONObject().put("key", jiraProjectKey).put("Description",description));
         fields.put("summary", summary);
-        //fields.put("description", description);
+       // fields.put("description", description);
         fields.put("issuetype", new JSONObject().put("name", "Bug"));
         json.put("fields", fields);
         StringBuilder responseStringBuilder = new StringBuilder();
