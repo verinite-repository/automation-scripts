@@ -21,13 +21,9 @@ import io.restassured.response.Response;
 
 public class JiraTicketonFailure extends TestWatcher {
 
-//    private String jiraBaseUrl = "https://demoserenity.atlassian.net";
-//    private String jiraUsername = "neha.kale@verinite.com";
-//    private String jiraPassword = "ATATT3xFfGF06v9sD6_caxgxgpqBX70ok4Fk2S4GYwWyLmHPQ22JTvOLgMxDZk45ch-9SkoAnA3dQ_GgGo2OrhumMK_RooOugwSvqrQ-xTA8UcXrnG6IApxYLiLynXoqa0siIEdTAvfDXa2CvnWcM_AhkaHgRYol2peVr9BbNoYsuP4-7gUC7DI=F4FA1E0F";
-//    private String jiraProjectKey = "SCRUM";
 	private String jiraBaseUrl = "https://verinite-team-itn5zr3m.atlassian.net";
     private String jiraUsername = "neha.kale@verinite.com";
-    private String jiraPassword = "ATATT3xFfGF0Kdrrw1ZhxXmIz3Zuzd-Rj1KBEddrhzVQbH25HCNxjpXYL2vJkpmoadiaO4n138MjftWMJPzAy6cXmXDCwZ0wpLViEaRUk6hiH9e6RvPEuH58MLG_5ILstn7JNWxWET15cWRd9FfdFB4gMM8auzgraUE-L3Z6017oBWdxRLQAolA=1586934C";
+    private String jiraPassword = "ATATT3xFfGF0-k0pxVaAKGCk48-VaAetYGcA5AeAf4Z2i0G6ceDyFMjFcy4-oqylURD8z3vT4LEST6SpSZVbVB3GYHI7ypuj-TNjLQzzK3x0Ivf7LvskMoDSp-M-QfhpNd04sttsaxlWc8uUDOpR54JaLDQpd3CnDTySilFg_a985kKI0QYRV90=F24A7350";
     private String jiraProjectKey = "KAN";
     private static final Logger logger = Logger.getLogger(JiraTicketonFailure.class.getName());
 
@@ -43,24 +39,7 @@ public class JiraTicketonFailure extends TestWatcher {
             e1.printStackTrace();
         }
     }*/
-    public String createJiraIssue(String testName, String errorMessage) {
-        String issueSummary = "Automated Test Failure: " + testName;
-        String issueDescription = "Test Case: " + testName + " Error Message: " + errorMessage;
-
-        String jsonBody = "{" + "\"fields\": {" + "\"project\": {" + "\"key\": \""
-                + jiraProjectKey + "\"," + "\"description\": \"" + issueDescription + "\"},"
-                + "        \"summary\": \"" + issueSummary + "\"," + "\"issuetype\": {\"name\": \"Bug\"}}}";
-
-        Response response = RestAssured.given().auth().preemptive().basic(jiraUsername, jiraPassword)
-                .header("Content-Type", "application/json").body(jsonBody).post(jiraBaseUrl + "/rest/api/2/issue/");
-        String responseAsString = response.getBody().asString();
-        JSONObject jsonResponse = new JSONObject(responseAsString);
-        String issueKey = jsonResponse.getString("key");
-        logger.info("Jira issue has been created " + issueKey);
-        return issueKey;
-    }
-
-    public String createTicket(String testName,String errorMessage, String runPlanId) throws IOException {
+     public String createTicket(String testName,String errorMessage, String runPlanId) throws IOException {
         String apiUrl = jiraBaseUrl + "/rest/api/3/issue/";
         String summary = "[Automated] Run Plan [" + runPlanId + "] :: Test Name :" + testName;
         String description = "Test Case: " + testName + " Error Message: " + errorMessage;
