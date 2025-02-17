@@ -44,10 +44,11 @@ public class Page extends PageObject {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-//		WebElement clickOperation = decideElementTypeForWebElement(elementType, elementKey);
-		WebElement executeButton= driver.findElement(By.xpath("//button[text()='Execute']"));
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click();", executeButton);
+		WebElement clickOperation = decideElementTypeForWebElement(elementType, elementKey);
+		clickOperation.click();
+		//WebElement executeButton= driver.findElement(By.xpath("//button[text()='Execute']"));
+		//JavascriptExecutor js = (JavascriptExecutor) driver;
+		//js.executeScript("arguments[0].click();", executeButton);
 		//executeButton.click();
 //		WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.name(buttonName)));
 //		searchButton.click();
