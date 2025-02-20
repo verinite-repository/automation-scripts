@@ -11,4 +11,4 @@ Scenario Outline: VERIFY_SEARCHHOTEL_ADACTIN
     Then he should be able to view <adactin_searchpage> in the field
      Examples:     
           |  user  |  adactin  |  username_login_value  |  username_login_element  |  pass_login_value  |  password_login_element  |  adactin_login  |  add_location  |  add_location_option1  |  search  |  adactin_searchpage  |  
-          |  adactin  |  Adactin.com-Select Hotel  |  CardTestAI  |  username  |  Welcome@123  |  password  |  login  |  location  |  //*[@id='location']/option[2]  |  //*[@id='Submit']  |  https://adactinhotelapp.com/SelectHotel.php  |  
+          |  adactin  |  https://adactinhotelapp.com/index.php  |  CardTestAI  |  username  |  Welcome@123  |  password  |  login  |  location  |  //*[@id='location']/option[2]  |  //*[@id='Submit']  |  Adactin.com-Search Hotel  |  
