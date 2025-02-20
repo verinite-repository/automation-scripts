@@ -7,7 +7,7 @@ Scenario Outline: VERIFY_SEARCHHOTEL_ADACTIN
     And he clicks the button named <adactin_login>
     And he clicks the button named <add_location>
     And he clicks the button identified by xpath <add_location_option1>
-    And he clicks the button identified by xpath <search>
+    And he clicks the button named <search>
     And he clicks the button named <select_hotel>
     And he clicks the button named <continue>
     Then he should be able to view <adactin_bookhotel> in the field
