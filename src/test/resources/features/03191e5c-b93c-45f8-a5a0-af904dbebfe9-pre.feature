@@ -5,7 +5,7 @@ Scenario Outline: VERIFY_SEARCHHOTEL_ADACTIN
     When he enters the value <username_login_value> in the field named <username_login_element>
     And he enters the value <pass_login_value> in the field named <password_login_element>
     And he clicks the button named <adactin_login>
-    And he clicks the button identified by xpath <add_location>
+    And he clicks the button named <add_location>
     And he clicks the button identified by xpath <add_location_option1>
     And he clicks the button identified by xpath <search>
     Then he should be able to view <adactin_searchpage> in the field
