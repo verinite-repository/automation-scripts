@@ -1,10 +1,11 @@
 package Utils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import org.apache.http.HttpEntity;
@@ -13,48 +14,62 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.rules.TestWatcher;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
+import javax.print.attribute.standard.JobStateReasons;
+
 public class JiraTicketonFailure extends TestWatcher {
 
-	private String jiraBaseUrl = "https://verinite-team-itn5zr3m.atlassian.net";
-    private String jiraUsername = "neha.kale@verinite.com";
-    private String jiraPassword = "ATATT3xFfGF0-k0pxVaAKGCk48-VaAetYGcA5AeAf4Z2i0G6ceDyFMjFcy4-oqylURD8z3vT4LEST6SpSZVbVB3GYHI7ypuj-TNjLQzzK3x0Ivf7LvskMoDSp-M-QfhpNd04sttsaxlWc8uUDOpR54JaLDQpd3CnDTySilFg_a985kKI0QYRV90=F24A7350";
-    private String jiraProjectKey = "KAN";
+    private static Properties properties;
     private static final Logger logger = Logger.getLogger(JiraTicketonFailure.class.getName());
 
-   /* @Override
-    protected void failed(Throwable e, Description description)
-    {
-        //createJiraIssue(description.getMethodName(), e.getMessage());
+    static {
         try {
-        String s=    createTicket(jiraProjectKey, description.getMethodName(),  e.getMessage());
-            System.out.println("Id: "+s);
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+            FileInputStream fileInput = new FileInputStream("src/main/resources/application.properties");
+            properties = new Properties();
+            properties.load(fileInput);
+            fileInput.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to load config.properties file.");
         }
-    }*/
-     public String createTicket(String testName,String errorMessage, String runPlanId) throws IOException {
-        String apiUrl = jiraBaseUrl + "/rest/api/3/issue/";
-        String summary = "[Automated] Run Plan [" + runPlanId + "] :: Test Name :" + testName;
-        String description = "Test Case: " + testName + " Error Message: " + errorMessage;
+    }
+
+
+    public String createTicket(String scenarioName, String errorMessage, String runPlanId, String failureMessages) throws IOException {
+        String apiUrl = properties.getProperty("jiraBaseUrl") + "/rest/api/3/issue/";
         JSONObject json = new JSONObject();
-        JSONObject fields = new JSONObject();
-        fields.put("project", new JSONObject().put("key", jiraProjectKey).put("Description",description));
-        fields.put("summary", summary);
-       // fields.put("description", description);
-        fields.put("issuetype", new JSONObject().put("name", "Bug"));
+        JSONObject descriptionText = new JSONObject()
+                .put("type", "text")
+                .put("text", "Run Plan: " + runPlanId + "\nFailure Details:\n" + failureMessages);
+
+        JSONArray contentArray = new JSONArray()
+                .put(new JSONObject()
+                        .put("type", "paragraph")
+                        .put("content", new JSONArray().put(descriptionText)));
+
+        JSONObject description = new JSONObject()
+                .put("type", "doc")
+                .put("version", 1)
+                .put("content", contentArray);
+
+        JSONObject fields = new JSONObject()
+                .put("project", new JSONObject().put("key", properties.getProperty("jiraProjectKey")))
+                .put("summary", "Failed Scenario: " + scenarioName)
+                .put("description", description)
+                .put("issuetype", new JSONObject().put("name", "Bug"));
         json.put("fields", fields);
+
         StringBuilder responseStringBuilder = new StringBuilder();
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpPost request = new HttpPost(apiUrl);
             request.setHeader("Content-Type", "application/json");
-            String auth = jiraUsername + ":" + jiraPassword;
+            String auth = properties.getProperty("jiraUsername") + ":" + properties.getProperty("jiraToken");
             byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.UTF_8));
             String authHeader = "Basic " + new String(encodedAuth, StandardCharsets.UTF_8);
             request.setHeader("Authorization", authHeader);
@@ -82,5 +97,4 @@ public class JiraTicketonFailure extends TestWatcher {
         logger.info("Jira issue has been created " + responseJson.getString("key"));
         return responseJson.getString("key");
     }
-
 }

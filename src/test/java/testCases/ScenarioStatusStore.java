@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Utils.FailureStorage;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Rule;
@@ -51,13 +52,18 @@ public class ScenarioStatusStore {
         }*/
        // storage.setScenarioStatuses(scenarioStatuses);
         System.out.println("########################################################################################################");
-      if(status.equalsIgnoreCase("FAILED"))
+        String failureMessages = FailureStorage.getAllFailures();
+        System.out.println("Failure Messages: " + failureMessages);
+
+        if(status.equalsIgnoreCase("FAILED"))
       {
-          String str= jireTicketonFailure.createTicket(scenarioName,scenario.getStatus().toString(), runPlanId);
+          String str= jireTicketonFailure.createTicket(scenarioName,scenario.getStatus().toString(), runPlanId,failureMessages);
           System.out.println("Jira issue ID:"+str);
       }
 
            }
+
+
     
     public static String extractFeatureId(String filePath) {
         // Get the file name from the path
