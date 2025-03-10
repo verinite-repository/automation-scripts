@@ -70,7 +70,7 @@ public class JiraTicketonFailure extends TestWatcher {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpPost request = new HttpPost(apiUrl);
             request.setHeader("Content-Type", "application/json");
-            String auth = properties.getProperty("jiraUsername") + ":" +jiraToken/*+ properties.getProperty("jiraToken")*/;
+            String auth = properties.getProperty("jiraUsername") + ":" +jiraToken;
             byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.UTF_8));
             String authHeader = "Basic " + new String(encodedAuth, StandardCharsets.UTF_8);
             request.setHeader("Authorization", authHeader);
