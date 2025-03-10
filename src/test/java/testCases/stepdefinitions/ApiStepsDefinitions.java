@@ -15,8 +15,8 @@ public class ApiStepsDefinitions {
 
     private Response response;
 
-    @Given("{} sets the API endpoint as {}")
-    public void UserSetsTheAPIEndpoint(String user, String apiendpoint) {
+    @Given("User sets the API endpoint as {}")
+    public void UserSetsTheAPIEndpoint(String apiendpoint) {
         usersteps.setApiEndpoint(apiendpoint);
     }
 
