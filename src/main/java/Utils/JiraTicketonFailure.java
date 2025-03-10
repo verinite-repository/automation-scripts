@@ -43,7 +43,7 @@ public class JiraTicketonFailure extends TestWatcher {
 
     public String createTicket(String scenarioName, String errorMessage, String runPlanId, String failureMessages) throws IOException {
         String apiUrl = properties.getProperty("jiraBaseUrl") + "/rest/api/3/issue/";
-        String jiraToken="ATATT3xFfGF0520wWqk4zRiCzwQRch88SdamM-zZst5dadsYLh5z9l_u3MD1oeMk_0W8tjfktTmvtjURBigl7Rv7u6xJoEXdVQmU8NMri6U1AjpZpJ598x7C79pbCaOZxc3iwAzchht6c9tyzazwuq-hSnXxVL0sLDKZEEeknRkvI_6ZAlkiREs=73DA3CBA";
+        String jiraToken="ATATT3xFfGF07s67w8aZoyYxsQjFw0zGrwZdHiOzLXnHb9nRS_oS4Yfh6jHL4D6rtsjB4O4akv3VvqmHsG75Pwyemr48Z93NdNuiiOz4o72qSXO_8257VjY-kqTxfa3uoYDqG85N2TMt6cX5pSAEIfA0tx6OlRarpSAhqi4IyTLGf-Tf7F0dB2A=CA4D4A38";
         JSONObject json = new JSONObject();
         JSONObject descriptionText = new JSONObject()
                 .put("type", "text")
