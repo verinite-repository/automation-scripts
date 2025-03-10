@@ -43,6 +43,7 @@ public class JiraTicketonFailure extends TestWatcher {
 
     public String createTicket(String scenarioName, String errorMessage, String runPlanId, String failureMessages) throws IOException {
         String apiUrl = properties.getProperty("jiraBaseUrl") + "/rest/api/3/issue/";
+        String jiraToken="ATATT3xFfGF0520wWqk4zRiCzwQRch88SdamM-zZst5dadsYLh5z9l_u3MD1oeMk_0W8tjfktTmvtjURBigl7Rv7u6xJoEXdVQmU8NMri6U1AjpZpJ598x7C79pbCaOZxc3iwAzchht6c9tyzazwuq-hSnXxVL0sLDKZEEeknRkvI_6ZAlkiREs=73DA3CBA";
         JSONObject json = new JSONObject();
         JSONObject descriptionText = new JSONObject()
                 .put("type", "text")
@@ -69,7 +70,7 @@ public class JiraTicketonFailure extends TestWatcher {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpPost request = new HttpPost(apiUrl);
             request.setHeader("Content-Type", "application/json");
-            String auth = properties.getProperty("jiraUsername") + ":" + properties.getProperty("jiraToken");
+            String auth = properties.getProperty("jiraUsername") + ":" +jiraToken/*+ properties.getProperty("jiraToken")*/;
             byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.UTF_8));
             String authHeader = "Basic " + new String(encodedAuth, StandardCharsets.UTF_8);
             request.setHeader("Authorization", authHeader);
