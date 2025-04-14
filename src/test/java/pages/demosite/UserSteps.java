@@ -52,7 +52,14 @@ public class UserSteps {
                        .body(requestBody)
                        .when()
                        .post(apiEndpoint);
-           } else {
+           }else if("PUT".equalsIgnoreCase(requestType)) {
+               response = RestAssured.given().header("Content-Type", "application/json")
+                       .body(requestBody)
+                       .when()
+                       .put(apiEndpoint);
+           }
+
+           else {
                throw new IllegalArgumentException("Request type not supported: " + requestType);
            }
        }catch (Exception e)
@@ -60,7 +67,6 @@ public class UserSteps {
            FailureStorage.addFailureMessage("Exception in ApiSteps: " + e.getMessage());
            Serenity.recordReportData().withTitle("Exception Occurred").andContents(e.getMessage());
            throw e;
-          //throw new RuntimeException("Error occurred while making API request", e);
        }
         return response;
     }
