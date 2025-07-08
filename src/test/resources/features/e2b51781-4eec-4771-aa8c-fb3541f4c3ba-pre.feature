@@ -8,5 +8,5 @@ Scenario Outline: VERIFY_ADDTOCART_ARTOFTESTING
     Then he should be able to view <artOfTesting_cart> in the field
      Examples:     
           |  user  |  artoftesting  |  ecom_artoftesting_loginbutton  |  add_twobooks  |  add_to_cart  |  artOfTesting_cart  |  
-          |  John Doe  |  https://ecommerce.artoftesting.com/  |  //*[@id='root']/div/div[1]/div/div/div/div[1]/form/button  |  //*[@id='root']/div/div[4]/div/div[1]/div[3]/svg[2]  |  add-to-cart-sauce-labs-backpack  |  https://ecommerce.artoftesting.com/cart  |  
-          |  John Doe  |  https://ecommerce.artoftesting.com/  |  //*[@id='root']/div/div[1]/div/div/div/div[1]/form/button  |  //*[@id='root']/div/div[4]/div/div[1]/div[3]/svg[2]  |  add-to-cart-sauce-labs-backpack  |  https://ecommerce.artoftesting.com/cart  |  
+          |  John Doe  |  https://ecommerce.artoftesting.com/  |  //*[@id='root']/div/div[1]/div/div/div/div[1]/form/button  |  //*[@id='root']/div/div[4]/div/div[2]/div[3]/svg[2]/path  |  add-to-cart-sauce-labs-backpack  |  https://ecommerce.artoftesting.com/cart  |  
+          |  John Doe  |  https://ecommerce.artoftesting.com/  |  //*[@id='root']/div/div[1]/div/div/div/div[1]/form/button  |  //*[@id='root']/div/div[4]/div/div[2]/div[3]/svg[2]/path  |  add-to-cart-sauce-labs-backpack  |  https://ecommerce.artoftesting.com/cart  |  
