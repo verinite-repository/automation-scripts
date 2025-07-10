@@ -6,4 +6,4 @@ Scenario Outline: VERIFY_LOGIN_ARTOFTESTING
     Then he should be able to view <artOfTesting_Ecom> in the field
      Examples:     
           |  user  |  artoftesting  |  ecom_artoftesting_loginbutton  |  artOfTesting_Ecom  |  
-          |  test  |  https://ecommerce.artoftesting.com/  |  //*[@id='root']/div/div[1]/div/div/div/div[1]/form/button  |  DummyEcommerce  |  
+          |  Smith  |  https://ecommerce.artoftesting.com/  |  //*[@id='root']/div/div[1]/div/div/div/div[1]/form/button  |  Dummy Ecommerce  |  
