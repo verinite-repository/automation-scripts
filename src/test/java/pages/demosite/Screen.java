@@ -72,4 +72,64 @@ public class Screen {
 			return element;
 		}
 	}
+
+	@Step
+	public boolean validateText(String expectedText,
+								String elementType,
+								String elementKey) {
+		elementKey = findBrackets(elementKey);
+		return page.validateText(expectedText,
+								elementType,
+								elementKey);
+	}
+
+	@Step
+	public boolean validateValue(String expectedValue,
+								String elementType,
+								String elementKey) {
+		elementKey = findBrackets(elementKey);
+		return page.validateValue(expectedValue,
+									elementType,
+									elementKey);
+	}
+
+	@Step
+	public boolean isDisplayed(String elementType,
+							String elementKey) {
+		elementKey = findBrackets(elementKey);
+		return page.isDisplayed(elementType,
+								elementKey);
+	}
+
+	@Step
+	public boolean isEnabled(String elementType,
+							String elementKey) {
+		elementKey = findBrackets(elementKey);
+		return page.isEnabled(elementType,
+							elementKey);
+	}
+
+	@Step
+	public boolean validateNestedText(String expectedText,
+									String elementType,
+									String elementKey) {
+		elementKey = findBrackets(elementKey);
+		return page.validateNestedText(
+				expectedText,
+				elementType,
+				elementKey);
+	}
+
+	@Step
+	public boolean validateAttribute(String expectedValue,
+									String attributeName,
+									String elementType,
+									String elementKey) {
+		elementKey = findBrackets(elementKey);
+		return page.validateAttribute(
+				expectedValue,
+				attributeName,
+				elementType,
+				elementKey);
+	}
 }

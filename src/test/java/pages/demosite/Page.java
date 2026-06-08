@@ -1,6 +1,7 @@
 package pages.demosite;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -87,4 +88,78 @@ public class Page extends PageObject {
 		updateOperation.sendKeys(value);
 	}
 
+	public boolean validateText(String expectedText,
+                            String elementType,
+                            String elementKey) {
+		WebElement element =
+				decideElementTypeForWebElement(elementType, elementKey);
+		String actualText = element.getText().trim();
+		return actualText.equals(expectedText);
+	}
+
+	public boolean validateValue(String expectedValue,
+                             String elementType,
+                             String elementKey) {
+		WebElement element =
+				decideElementTypeForWebElement(elementType, elementKey);
+		String actualValue = element.getAttribute("value");
+		return actualValue.equals(expectedValue);
+	}
+
+	public boolean isDisplayed(String elementType,
+							String elementKey) {
+		WebElement element =
+				decideElementTypeForWebElement(elementType, elementKey);
+		return element.isDisplayed();
+	}
+
+	public boolean isEnabled(String elementType,
+                         String elementKey) {
+		WebElement element =
+				decideElementTypeForWebElement(elementType, elementKey);
+		return element.isEnabled();
+	}
+
+	public String getNestedText(WebElement element) {
+		StringBuilder text = new StringBuilder();
+		try {
+			String currentText = element.getText();
+			if (currentText != null && !currentText.isEmpty()) {
+				text.append(currentText).append(" ");
+			}
+			List<WebElement> children =
+					element.findElements(By.xpath("./*"));
+			for (WebElement child : children) {
+				text.append(getNestedText(child));
+			}
+		} catch (Exception e) {
+			System.out.println("Issue while fetching nested Object : {}"+ e.getMessage());
+		}
+		return text.toString().trim();
+	}
+
+	public boolean validateNestedText(String expectedText,
+                                  String elementType,
+                                  String elementKey) {
+		WebElement parent =
+				decideElementTypeForWebElement(
+						elementType,
+						elementKey);
+		String actualText =
+				getNestedText(parent);
+		return actualText.contains(expectedText);
+	}
+
+	public boolean validateAttribute(String expectedValue,
+                                 String attributeName,
+                                 String elementType,
+                                 String elementKey) {
+		WebElement element =
+				decideElementTypeForWebElement(
+						elementType,
+						elementKey);
+		String actualValue =
+				element.getAttribute(attributeName);
+		return expectedValue.equals(actualValue);
+	}
 }

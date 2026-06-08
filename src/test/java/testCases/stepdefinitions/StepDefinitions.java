@@ -1,5 +1,8 @@
 package testCases.stepdefinitions;
 
+// import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,5 +87,62 @@ public class StepDefinitions extends UIInteractions {
     @When("he clicks the element identified by {}")
     public void heClicksTheElementIdentifiedByElementId(String elementId) {
         System.out.println("parameters: " + elementId);
+    }
+
+    @Then("he should see the text {} in the element identified by xpath {}")
+    public void validateTextByXpath(String expectedText,
+                                    String xpath) {
+        assertTrue(
+                screen.validateText(
+                        expectedText,
+                        "xpath",
+                        xpath));
+    }
+
+    @Then("he should see the value {} in the field named {}")
+    public void validateValueByName(String expectedValue,
+                                    String fieldName) {
+        assertTrue(
+                screen.validateValue(
+                        expectedValue,
+                        "name",
+                        fieldName));
+    }
+
+    @Then("the element identified by xpath {} should be displayed")
+    public void elementShouldBeDisplayed(String xpath) {
+        assertTrue(
+                screen.isDisplayed(
+                        "xpath",
+                        xpath));
+    }
+
+    @Then("the element identified by xpath {} should be enabled")
+    public void elementShouldBeEnabled(String xpath) {
+        assertTrue(
+                screen.isEnabled(
+                        "xpath",
+                        xpath));
+    }
+
+    @Then("he should see result {} under element {}")
+    public void validateNestedResult(String expectedResult,
+                                    String xpath) {
+        assertTrue(
+                screen.validateNestedText(
+                        expectedResult,
+                        "xpath",
+                        xpath));
+    }
+
+    @Then("he should be able to view {} in element {} having attribute {}")
+    public void validateAttribute(String expectedValue,
+                                String xpath, String attribute) {
+        assertTrue(
+                screen.validateAttribute(
+                        expectedValue,
+                        attribute,
+                        "xpath",
+                        xpath));
     }
 }
