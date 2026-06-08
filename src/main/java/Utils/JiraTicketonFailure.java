@@ -28,7 +28,7 @@ public class JiraTicketonFailure extends TestWatcher {
 	private String jiraBaseUrl = "https://verinite-team-itn5zr3m.atlassian.net";
     private String jiraUsername = "sumeet.bandgar@verinite.com";
     private String newJiraPass = "ATATT3xFfGF0MU3Y5xk-m3QKUQ9P8zic_Y0iDoix-pFlULhlq8Ad6f7_TicomPq4mpS03v0MsND0l8N5A1VtG2wIgDXigNQR_uxBD18cD8-XJN-FL7S7W5eRofda0HwAFun-pKE1BAqXiXfryytgd5H2UyPIOdNx7dx9wjy3VpYLpF5rdsGds1c=C09A3843";
-    private String jiraPassword = "ATATT3xFfGF0jlvIwAMVe9hKTwIxcwKd3pp2_8SMzrBU6nB_1rdWavAzAF3MuqohLYd2sFXqYcyuD2_I4IF54FjTaO8s9MF8rWtot35yQwltvrbgZSl6aqkuCQNpspyHATjP4RCCqS0UWIllQQr4Yebns4UUOzPkY_fUqzQFb36_9dqH6GOXWY4=9CE11053";
+//    private String jiraPassword = "ATATT3xFfGF0jlvIwAMVe9hKTwIxcwKd3pp2_8SMzrBU6nB_1rdWavAzAF3MuqohLYd2sFXqYcyuD2_I4IF54FjTaO8s9MF8rWtot35yQwltvrbgZSl6aqkuCQNpspyHATjP4RCCqS0UWIllQQr4Yebns4UUOzPkY_fUqzQFb36_9dqH6GOXWY4=9CE11053";
     private String pass = "Verinite@321";
     private String jiraProjectKey = "KAN";
     private static final Logger logger = Logger.getLogger(JiraTicketonFailure.class.getName());
